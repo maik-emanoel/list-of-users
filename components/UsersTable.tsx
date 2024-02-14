@@ -1,3 +1,4 @@
+import TableUsersRow from "./TableUsersRow";
 import {
   Table,
   TableCaption,
@@ -5,12 +6,14 @@ import {
   TableRow,
   TableHead,
   TableBody,
-  TableCell,
 } from "./ui/table";
+import { prisma } from "@/lib/prisma";
 
-export default function UsersTable() {
+export default async function UsersTable() {
+  const users = await prisma.user.findMany()
+
   return (
-    <Table>
+    <Table className="mt-4">
       <TableCaption>A list of your users.</TableCaption>
       <TableHeader>
         <TableRow>
@@ -21,12 +24,7 @@ export default function UsersTable() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        <TableRow>
-          <TableCell className="font-medium">1</TableCell>
-          <TableCell>Maik Emanoel</TableCell>
-          <TableCell>Dev Front-end</TableCell>
-          <TableCell className="text-right">20</TableCell>
-        </TableRow>
+        <TableUsersRow users={users} />
       </TableBody>
     </Table>
   );
