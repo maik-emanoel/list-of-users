@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +17,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" className="dark">
-      <body className={`${inter.className} antialiased body`}>{children}</body>
+      <body className={`${inter.className} antialiased body`}>
+        <main className="py-16 max-w-[700px] mx-auto min-h-screen flex flex-col items-center space-y-8">
+          {children}
+          <Toaster />
+        </main>
+      </body>
     </html>
   );
 }
