@@ -52,7 +52,10 @@ export default function TableUsersRow({ users }: UserProps) {
             <TableCell>
               <TrashIcon
                 className="mx-auto size-5 cursor-pointer"
-                onClick={() => handleDeleteUser(user.id)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDeleteUser(user.id);
+                }}
               />
             </TableCell>
           </TableRow>
