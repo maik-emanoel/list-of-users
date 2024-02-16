@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 import TableUsersRow from "./TableUsersRow";
 import {
   Table,
@@ -7,10 +8,12 @@ import {
   TableHead,
   TableBody,
 } from "./ui/table";
-import { prisma } from "@/lib/prisma";
 
 export default async function UsersTable() {
-  const users = await prisma.user.findMany()
+  const fetchUsers = await fetch(`${process.env.BASE_URL}/api/user`, {
+    cache: "no-store",
+  })
+  const users = await fetchUsers.json()
 
   return (
     <Table className="mt-4">
