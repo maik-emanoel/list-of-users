@@ -1,8 +1,23 @@
 import { prisma } from "@/lib/prisma";
+import { NextRequest } from "next/server";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
     const users = await prisma.user.findMany();
+    const params = request.nextUrl.searchParams;
+    const nameParam = params.get("name");
+
+    if (nameParam) {
+      const usersFiltered = await prisma.user.findMany({
+        where: {
+          name: {
+            contains: nameParam as string,
+          },
+        },
+      });
+
+      return Response.json(usersFiltered);
+    }
 
     return Response.json(users);
   } catch (error) {

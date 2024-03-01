@@ -9,14 +9,16 @@ import {
   TableBody,
 } from "./ui/table";
 
-export default async function UsersTable() {
-  const fetchUsers = await fetch(`${process.env.BASE_URL}/api/user`, {
+export default async function UsersTable({ name }: { name: string | undefined }) {
+  const nameParam = name !== undefined ? `?name=${name}` : ''
+  const fetchUsers = await fetch(`${process.env.BASE_URL}/api/user${nameParam}`, {
     cache: "no-store",
-  })
-  const users = await fetchUsers.json()
+  });
+
+  const users = await fetchUsers.json();
 
   return (
-    <Table className="mt-4">
+    <Table>
       <TableCaption>A list of your users.</TableCaption>
       <TableHeader>
         <TableRow>
