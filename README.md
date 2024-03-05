@@ -1,4 +1,4 @@
-<h1 align="center"> List de usuários </h1>
+<h1 align="center"> Lista de usuários </h1>
 
 ![preview](./.github/preview.png)
 
